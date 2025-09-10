@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Editar Paciente')
+@section('page-title', 'Editar Paciente')
 
 @section('content')
 <div class="space-y-6">
@@ -12,7 +13,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
             </svg>
         </a>
-        <h1 class="text-2xl font-semibold text-gray-900">Editar Paciente</h1>
+        <p class="text-sm text-gray-600">Modifica la información del paciente {{ $paciente->nombre }}</p>
     </div>
 
     <!-- Form -->
