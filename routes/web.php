@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\PacienteController;
 use Illuminate\Support\Facades\Route;
 
 // Authentication Routes
@@ -13,10 +14,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });
 
-// Protected Routes (will be used for future modules)
+// Protected Routes
 Route::middleware('auth')->group(function () {
-    // Placeholder for pacientes module
-    Route::get('/pacientes', function () {
-        return view('welcome'); // Temporary placeholder
-    })->name('pacientes.index');
+    // Pacientes CRUD
+    Route::resource('pacientes', PacienteController::class);
 });
