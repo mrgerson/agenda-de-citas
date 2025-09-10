@@ -101,7 +101,7 @@
                                 <dt class="text-sm font-medium text-gray-500">Fecha</dt>
                                 <dd class="mt-1 text-sm text-gray-900">
                                     <i class="fas fa-calendar-alt mr-2 text-gray-400"></i>
-                                    {{ $cita->fecha->format('l, d \d\e F \d\e Y') }}
+                                    {{ $cita->fecha->format('d/m/Y') }}
                                     @if($cita->esHoy())
                                         <span class="ml-2 inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-emerald-100 text-emerald-800">
                                             Hoy
@@ -114,7 +114,11 @@
                                 <dt class="text-sm font-medium text-gray-500">Hora</dt>
                                 <dd class="mt-1 text-sm text-gray-900">
                                     <i class="fas fa-clock mr-2 text-gray-400"></i>
-                                    {{ $cita->hora->format('g:i A') }}
+                                    @php
+                                        $horaLimpia = substr($cita->hora, 0, 5); // Solo HH:MM
+                                        $horaFormateada = \Carbon\Carbon::parse($horaLimpia)->format('g:i A');
+                                    @endphp
+                                    {{ $horaFormateada }}
                                     @if($cita->yaPaso())
                                         <span class="ml-2 text-xs text-red-600">(Vencida)</span>
                                     @endif
@@ -218,7 +222,7 @@
                                     <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                                         <div>
                                             <p class="text-sm font-medium text-gray-900">
-                                                {{ $otraCita->fecha->format('d/m/Y') }} - {{ $otraCita->hora->format('H:i') }}
+                                                {{ $otraCita->fecha->format('d/m/Y') }} - {{ substr($otraCita->hora, 0, 5) }}
                                             </p>
                                             <p class="text-xs text-gray-500">{{ Str::limit($otraCita->motivo, 30) }}</p>
                                         </div>

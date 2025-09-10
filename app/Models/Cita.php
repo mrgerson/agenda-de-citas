@@ -18,7 +18,6 @@ class Cita extends Model
 
     protected $casts = [
         'fecha' => 'date',
-        'hora' => 'datetime:H:i',
     ];
 
     // Estados disponibles
@@ -50,7 +49,8 @@ class Cita extends Model
      */
     public function getFechaHoraFormateadaAttribute(): string
     {
-        return $this->fecha->format('d/m/Y') . ' a las ' . $this->hora->format('H:i');
+        $horaLimpia = substr($this->hora, 0, 5); // Tomar solo HH:MM
+        return $this->fecha->format('d/m/Y') . ' a las ' . $horaLimpia;
     }
 
     /**
@@ -66,8 +66,15 @@ class Cita extends Model
      */
     public function yaPaso(): bool
     {
-        $fechaHoraCita = Carbon::parse($this->fecha->format('Y-m-d') . ' ' . $this->hora->format('H:i:s'));
-        return $fechaHoraCita->isPast();
+        try {
+            // Limpiar la hora para obtener solo HH:MM
+            $horaLimpia = substr($this->hora, 0, 5); // Tomar solo los primeros 5 caracteres (HH:MM)
+            $fechaHoraCita = Carbon::parse($this->fecha->format('Y-m-d') . ' ' . $horaLimpia);
+            return $fechaHoraCita->isPast();
+        } catch (\Exception $e) {
+            // Si hay error en el parsing, asumir que no ha pasado
+            return false;
+        }
     }
 
     /**

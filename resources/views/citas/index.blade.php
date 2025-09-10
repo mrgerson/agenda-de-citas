@@ -111,7 +111,7 @@
                                         </div>
                                         <div class="text-sm text-gray-500">
                                             <i class="fas fa-clock mr-1 text-gray-400"></i>
-                                            {{ $cita->hora->format('H:i') }}
+                                            {{ substr($cita->hora, 0, 5) }}
                                         </div>
                                     </td>
                                     <td class="px-6 py-4">

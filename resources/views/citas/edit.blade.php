@@ -40,7 +40,7 @@
                                     </span>
                                 </p>
                                 <p><strong>Fecha actual:</strong> {{ $cita->fecha->format('d/m/Y') }}</p>
-                                <p><strong>Hora actual:</strong> {{ $cita->hora->format('H:i') }}</p>
+                                <p><strong>Hora actual:</strong> {{ substr($cita->hora, 0, 5) }}</p>
                             </div>
                         </div>
                     </div>
@@ -103,7 +103,7 @@
                                                 $minute,
                                                 $hour >= 12 ? 'PM' : 'AM'
                                             );
-                                            $selected = old('hora', $cita->hora->format('H:i')) == $time;
+                                            $selected = old('hora', substr($cita->hora, 0, 5)) == $time;
                                         @endphp
                                         <option value="{{ $time }}" {{ $selected ? 'selected' : '' }}>
                                             {{ $timeDisplay }}
