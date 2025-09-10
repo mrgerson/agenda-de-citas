@@ -9,7 +9,8 @@
     <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
         <div class="flex justify-between items-center mb-6">
             <h2 class="text-xl font-semibold text-gray-800">Gestión de Pacientes</h2>
-            <a href="{{ route('pacientes.create') }}" class="bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-4 py-2 rounded-lg hover:from-emerald-600 hover:to-teal-600 transition-all duration-200 flex items-center">
+            <a href="{{ route('pacientes.create') }}"
+                class="bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-4 py-2 rounded-lg hover:from-emerald-600 hover:to-teal-600 transition-all duration-200 flex items-center">
                 <i class="fas fa-plus mr-2"></i>
                 Nuevo Paciente
             </a>
@@ -19,12 +20,18 @@
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Paciente</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Documento</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha Nacimiento</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Teléfono</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Paciente
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Documento
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha
+                            Nacimiento</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Teléfono
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones
+                        </th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
@@ -32,12 +39,15 @@
                         <tr class="hover:bg-gray-50 transition-colors duration-200">
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center">
-                                    <div class="h-10 w-10 flex-shrink-0 bg-gradient-to-r from-emerald-100 to-teal-100 rounded-full flex items-center justify-center border border-emerald-200">
-                                        <span class="text-emerald-800 font-medium text-sm">{{ substr($paciente->nombre, 0, 2) }}</span>
+                                    <div
+                                        class="h-10 w-10 flex-shrink-0 bg-gradient-to-r from-emerald-100 to-teal-100 rounded-full flex items-center justify-center border border-emerald-200">
+                                        <span
+                                            class="text-emerald-800 font-medium text-sm">{{ substr($paciente->nombre, 0, 2) }}</span>
                                     </div>
                                     <div class="ml-4">
                                         <div class="text-sm font-medium text-gray-900">{{ $paciente->nombre }}</div>
-                                        <div class="text-sm text-gray-500">ID: PT-{{ str_pad($paciente->id, 4, '0', STR_PAD_LEFT) }}</div>
+                                        <div class="text-sm text-gray-500">ID:
+                                            PT-{{ str_pad($paciente->id, 4, '0', STR_PAD_LEFT) }}</div>
                                     </div>
                                 </div>
                             </td>
@@ -51,7 +61,7 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="text-sm text-gray-900">{{ $paciente->telefono ?? 'N/A' }}</div>
-                                @if($paciente->telefono)
+                                @if ($paciente->telefono)
                                     <div class="text-sm text-gray-500">
                                         <i class="fas fa-phone text-xs mr-1"></i>
                                         Contacto disponible
@@ -59,7 +69,8 @@
                                 @endif
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                <span
+                                    class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                                     <i class="fas fa-check-circle mr-1"></i>
                                     Activo
                                 </span>
@@ -67,21 +78,23 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                 <div class="flex items-center space-x-2">
                                     <a href="{{ route('pacientes.show', $paciente) }}"
-                                       class="text-emerald-600 hover:text-emerald-900 p-2 rounded-lg hover:bg-emerald-50 transition-all duration-200"
-                                       title="Ver detalles">
+                                        class="text-emerald-600 hover:text-emerald-900 p-2 rounded-lg hover:bg-emerald-50 transition-all duration-200"
+                                        title="Ver detalles">
                                         <i class="fas fa-eye"></i>
                                     </a>
                                     <a href="{{ route('pacientes.edit', $paciente) }}"
-                                       class="text-blue-600 hover:text-blue-900 p-2 rounded-lg hover:bg-blue-50 transition-all duration-200"
-                                       title="Editar">
+                                        class="text-blue-600 hover:text-blue-900 p-2 rounded-lg hover:bg-blue-50 transition-all duration-200"
+                                        title="Editar">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <form method="POST" action="{{ route('pacientes.destroy', $paciente) }}" class="inline" onsubmit="return confirm('¿Está seguro de que desea eliminar este paciente?')">
+                                    <form method="POST" action="{{ route('pacientes.destroy', $paciente) }}"
+                                        class="inline"
+                                        onsubmit="return confirm('¿Está seguro de que desea eliminar este paciente?')">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
-                                                class="text-red-600 hover:text-red-900 p-2 rounded-lg hover:bg-red-50 transition-all duration-200"
-                                                title="Eliminar">
+                                            class="text-red-600 hover:text-red-900 p-2 rounded-lg hover:bg-red-50 transition-all duration-200"
+                                            title="Eliminar">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </form>
@@ -95,7 +108,8 @@
                                     <i class="fas fa-user-injured text-gray-400 text-6xl mb-4"></i>
                                     <h3 class="text-lg font-medium text-gray-900 mb-2">No hay pacientes registrados</h3>
                                     <p class="text-gray-500 mb-4">Comience agregando el primer paciente al sistema.</p>
-                                    <a href="{{ route('pacientes.create') }}" class="bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-6 py-2 rounded-lg hover:from-emerald-600 hover:to-teal-600 transition-all duration-200">
+                                    <a href="{{ route('pacientes.create') }}"
+                                        class="bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-6 py-2 rounded-lg hover:from-emerald-600 hover:to-teal-600 transition-all duration-200">
                                         <i class="fas fa-plus mr-2"></i>
                                         Agregar Primer Paciente
                                     </a>
@@ -107,7 +121,7 @@
             </table>
         </div>
 
-        @if($pacientes->count() > 0)
+        @if ($pacientes->count() > 0)
             <div class="mt-6 flex items-center justify-between">
                 <div class="text-sm text-gray-700">
                     Mostrando {{ $pacientes->count() }} de {{ $pacientes->count() }} pacientes
