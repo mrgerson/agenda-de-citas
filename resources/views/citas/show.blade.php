@@ -41,6 +41,15 @@
                         </button>
                     </form>
                 @elseif($cita->estado === 'confirmada')
+                    <!-- Botón para crear admisión si no existe -->
+                    @if(!$cita->tieneAdmision())
+                        <a href="{{ route('admisiones.create', ['cita_id' => $cita->id]) }}"
+                            class="inline-flex items-center px-3 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+                            <i class="fas fa-clipboard-check mr-2"></i>
+                            Crear Admisión
+                        </a>
+                    @endif
+
                     <form method="POST" action="{{ route('citas.completar', $cita) }}" class="inline">
                         @csrf
                         @method('PATCH')
@@ -157,6 +166,100 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Información de Admisión -->
+                @if($cita->tieneAdmision())
+                    <div class="bg-white shadow rounded-lg">
+                        <div class="px-6 py-4 border-b border-gray-200">
+                            <div class="flex items-center justify-between">
+                                <h3 class="text-lg font-medium text-gray-900">Información de Admisión</h3>
+                                <a href="{{ route('admisiones.show', $cita->admision) }}"
+                                    class="inline-flex items-center text-sm text-emerald-600 hover:text-emerald-500">
+                                    <i class="fas fa-external-link-alt mr-1"></i>
+                                    Ver detalles completos
+                                </a>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <dl class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div>
+                                    <dt class="text-sm font-medium text-gray-500">Estado de Admisión</dt>
+                                    <dd class="mt-1">
+                                        @php
+                                            $estadoAdmisionClasses = [
+                                                'pendiente' => 'bg-yellow-100 text-yellow-800',
+                                                'admitido' => 'bg-green-100 text-green-800',
+                                                'no_asistio' => 'bg-red-100 text-red-800'
+                                            ];
+                                        @endphp
+                                        <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full {{ $estadoAdmisionClasses[$cita->admision->estado] }}">
+                                            {{ ucfirst(str_replace('_', ' ', $cita->admision->estado)) }}
+                                        </span>
+                                    </dd>
+                                </div>
+
+                                <div>
+                                    <dt class="text-sm font-medium text-gray-500">Asistencia</dt>
+                                    <dd class="mt-1 text-sm text-gray-900">
+                                        @if($cita->admision->asistencia)
+                                            <span class="inline-flex items-center text-green-600">
+                                                <i class="fas fa-check-circle mr-1"></i>
+                                                Asistió
+                                            </span>
+                                        @else
+                                            <span class="inline-flex items-center text-red-600">
+                                                <i class="fas fa-times-circle mr-1"></i>
+                                                No asistió
+                                            </span>
+                                        @endif
+                                    </dd>
+                                </div>
+
+                                @if($cita->admision->fecha_admision)
+                                    <div>
+                                        <dt class="text-sm font-medium text-gray-500">Fecha de Admisión</dt>
+                                        <dd class="mt-1 text-sm text-gray-900">
+                                            <i class="fas fa-calendar-check mr-2 text-gray-400"></i>
+                                            {{ $cita->admision->fecha_admision->format('d/m/Y H:i') }}
+                                        </dd>
+                                    </div>
+                                @endif
+
+                                @if($cita->admision->notas)
+                                    <div class="sm:col-span-2">
+                                        <dt class="text-sm font-medium text-gray-500">Notas de Admisión</dt>
+                                        <dd class="mt-1 text-sm text-gray-900">{{ Str::limit($cita->admision->notas, 100) }}</dd>
+                                    </div>
+                                @endif
+                            </dl>
+                        </div>
+                    </div>
+                @elseif($cita->estado === 'confirmada')
+                    <!-- Mensaje para crear admisión -->
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg">
+                        <div class="p-6">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-clipboard-check text-blue-400 text-xl"></i>
+                                </div>
+                                <div class="ml-4 flex-1">
+                                    <h4 class="text-sm font-medium text-blue-900">Admisión Pendiente</h4>
+                                    <p class="mt-1 text-sm text-blue-700">
+                                        Esta cita está confirmada pero aún no tiene registro de admisión.
+                                        Puedes crear el registro de admisión para gestionar la llegada del paciente.
+                                    </p>
+                                </div>
+                                <div class="ml-4">
+                                    <a href="{{ route('admisiones.create', ['cita_id' => $cita->id]) }}"
+                                        class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700">
+                                        <i class="fas fa-plus mr-2"></i>
+                                        Crear Admisión
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
             </div>
 
             <!-- Información del paciente -->
