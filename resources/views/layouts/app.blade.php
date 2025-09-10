@@ -126,80 +126,7 @@
                             </div>
                         @endif
                     </div>
-
-                    <!-- Doctores -->
-                    <div class="space-y-1">
-                        <a href="#"
-                           class="group flex items-center px-3 py-3 text-sm font-medium rounded-xl text-emerald-100 hover:bg-white/10 hover:text-white backdrop-blur-sm transition-all duration-300">
-                            <div class="mr-3 flex-shrink-0 h-5 w-5 text-emerald-300">
-                                <i class="fas fa-user-md"></i>
-                            </div>
-                            Doctores
-                            <i class="fas fa-chevron-down ml-auto text-xs"></i>
-                        </a>
-                    </div>
-
-                    <!-- Citas Médicas -->
-                    <a href="#"
-                       class="group flex items-center px-3 py-3 text-sm font-medium rounded-xl text-emerald-100 hover:bg-white/10 hover:text-white backdrop-blur-sm transition-all duration-300 relative">
-                        <div class="mr-3 flex-shrink-0 h-5 w-5 text-amber-400">
-                            <i class="fas fa-calendar-check"></i>
-                        </div>
-                        Citas Médicas
-                        <span class="ml-auto text-xs bg-gradient-to-r from-amber-500 to-orange-500 text-white px-2.5 py-1 rounded-full font-semibold">Próximamente</span>
-                    </a>
-
-                    <!-- Farmacia -->
-                    <a href="#"
-                       class="group flex items-center px-3 py-3 text-sm font-medium rounded-xl text-emerald-100 hover:bg-white/10 hover:text-white backdrop-blur-sm transition-all duration-300">
-                        <div class="mr-3 flex-shrink-0 h-5 w-5 text-blue-400">
-                            <i class="fas fa-pills"></i>
-                        </div>
-                        Farmacia
-                    </a>
-
-                    <!-- Laboratorio -->
-                    <a href="#"
-                       class="group flex items-center px-3 py-3 text-sm font-medium rounded-xl text-emerald-100 hover:bg-white/10 hover:text-white backdrop-blur-sm transition-all duration-300">
-                        <div class="mr-3 flex-shrink-0 h-5 w-5 text-purple-400">
-                            <i class="fas fa-vial"></i>
-                        </div>
-                        Laboratorio
-                    </a>
-
-                    <!-- Reportes -->
-                    <a href="#"
-                       class="group flex items-center px-3 py-3 text-sm font-medium rounded-xl text-emerald-100 hover:bg-white/10 hover:text-white backdrop-blur-sm transition-all duration-300">
-                        <div class="mr-3 flex-shrink-0 h-5 w-5 text-red-400">
-                            <i class="fas fa-chart-pie"></i>
-                        </div>
-                        Reportes
-                    </a>
                 </nav>
-
-                <!-- User Info -->
-                <div class="flex-shrink-0 bg-gradient-to-r from-teal-900 to-emerald-900 p-4 border-t border-emerald-700/50">
-                    <div class="flex items-center">
-                        <div class="flex-shrink-0 relative">
-                            <div class="h-10 w-10 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 flex items-center justify-center shadow-lg border-2 border-white/20">
-                                <span class="text-sm font-bold text-white">{{ substr(auth()->user()->name, 0, 2) }}</span>
-                            </div>
-                            <div class="notification-dot"></div>
-                        </div>
-                        <div class="ml-3 flex-1">
-                            <p class="text-sm font-semibold text-white">{{ auth()->user()->name }}</p>
-                            <p class="text-xs text-emerald-300">{{ auth()->user()->username }}</p>
-                        </div>
-                        <div class="ml-2 relative">
-                            <form method="POST" action="{{ route('logout') }}" class="inline">
-                                @csrf
-                                <button type="submit" class="text-gray-400 hover:text-red-400 p-2 rounded-lg hover:bg-white/10 transition-all duration-200" title="Cerrar Sesión">
-                                    <i class="fas fa-sign-out-alt"></i>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -215,16 +142,28 @@
                         <h1 class="text-2xl font-semibold text-gray-900">@yield('page-title', 'Dashboard')</h1>
                     </div>
                     <div class="flex items-center space-x-4">
-                        <button class="relative p-2 text-gray-500 hover:text-gray-700">
-                            <i class="fas fa-bell text-xl"></i>
-                            <span class="absolute top-0 right-0 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center">3</span>
-                        </button>
-                        <button class="relative p-2 text-gray-500 hover:text-gray-700">
-                            <i class="fas fa-envelope text-xl"></i>
-                            <span class="absolute top-0 right-0 bg-blue-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center">7</span>
-                        </button>
                         <div class="text-sm text-gray-500">
                             <i class="far fa-clock mr-1"></i> {{ now()->format('d/m/Y H:i A') }}
+                        </div>
+
+                        <!-- User Profile -->
+                        <div class="flex items-center space-x-3 bg-gray-50 rounded-lg px-3 py-2">
+                            <div class="flex-shrink-0 relative">
+                                <div class="h-8 w-8 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 flex items-center justify-center shadow-sm border border-emerald-200">
+                                    <span class="text-xs font-bold text-white">{{ substr(auth()->user()->name, 0, 2) }}</span>
+                                </div>
+                                <div class="notification-dot"></div>
+                            </div>
+                            <div class="hidden md:block">
+                                <p class="text-sm font-medium text-gray-900">{{ auth()->user()->name }}</p>
+                                <p class="text-xs text-gray-500">{{ auth()->user()->username }}</p>
+                            </div>
+                            <form method="POST" action="{{ route('logout') }}" class="inline">
+                                @csrf
+                                <button type="submit" class="text-gray-400 hover:text-red-500 p-1.5 rounded-lg hover:bg-red-50 transition-all duration-200" title="Cerrar Sesión">
+                                    <i class="fas fa-sign-out-alt text-sm"></i>
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
