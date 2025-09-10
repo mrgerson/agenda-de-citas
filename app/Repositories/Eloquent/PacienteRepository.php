@@ -67,7 +67,7 @@ class PacienteRepository implements PacienteRepositoryInterface
 
     public function getPaginated(int $perPage = 15): LengthAwarePaginator
     {
-        return $this->model->orderBy('nombre')->paginate($perPage);
+        return $this->model->orderBy('id', 'desc')->paginate($perPage);
     }
 
     public function searchPaginated(string $search, int $perPage = 15): LengthAwarePaginator
@@ -75,7 +75,7 @@ class PacienteRepository implements PacienteRepositoryInterface
         return $this->model
             ->where('nombre', 'LIKE', "%{$search}%")
             ->orWhere('documento', 'LIKE', "%{$search}%")
-            ->orderBy('nombre')
+            ->orderBy('id', 'desc')
             ->paginate($perPage);
     }
 }

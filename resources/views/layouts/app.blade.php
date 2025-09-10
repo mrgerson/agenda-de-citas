@@ -124,11 +124,6 @@
                                     <div class="w-1.5 h-1.5 bg-current rounded-full mr-2"></div>
                                     Nuevo Paciente
                                 </a>
-                                <a href="#"
-                                    class="group flex items-center px-2 py-2 text-xs font-medium rounded-lg text-emerald-300 hover:text-emerald-200 hover:bg-emerald-500/10 transition-all duration-200">
-                                    <div class="w-1.5 h-1.5 bg-current rounded-full mr-2"></div>
-                                    Historial Médico
-                                </a>
                             </div>
                         @endif
                     </div>

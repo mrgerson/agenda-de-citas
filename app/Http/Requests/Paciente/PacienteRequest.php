@@ -20,7 +20,7 @@ class PacienteRequest extends FormRequest
      */
     public function rules(): array
     {
-        $pacienteId = $this->route('paciente') ? $this->route('paciente')->id : null;
+        $pacienteId = $this->getPacienteId();
 
         return [
             'nombre' => [
@@ -91,5 +91,29 @@ class PacienteRequest extends FormRequest
             'fecha_nacimiento' => 'fecha de nacimiento',
             'telefono' => 'teléfono',
         ];
+    }
+
+    /**
+     * Obtener el ID del paciente desde el parámetro de la ruta
+     */
+    private function getPacienteId(): ?int
+    {
+        $pacienteParam = $this->route('paciente');
+
+        if (!$pacienteParam) {
+            return null;
+        }
+
+        // Si es un objeto modelo, obtener su ID
+        if (is_object($pacienteParam) && isset($pacienteParam->id)) {
+            return (int) $pacienteParam->id;
+        }
+
+        // Si es un string/int, convertirlo a entero
+        if (is_numeric($pacienteParam)) {
+            return (int) $pacienteParam;
+        }
+
+        return null;
     }
 }

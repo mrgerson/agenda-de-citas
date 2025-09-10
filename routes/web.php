@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 // Authentication Routes
 Route::middleware('guest')->group(function () {
     Route::get('/', [LoginController::class, 'showLoginForm'])->name('login');
-    Route::post('/login', [LoginController::class, 'login']);
+    Route::post('/login', [LoginController::class, 'login'])->name('login.post');
 });
 
 Route::middleware('auth')->group(function () {

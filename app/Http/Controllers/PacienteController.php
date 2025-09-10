@@ -80,7 +80,7 @@ class PacienteController extends Controller
     /**
      * Actualizar paciente
      */
-    public function update(PacienteRequest $request, int $id): RedirectResponse
+    public function update(PacienteRequest $request, $id): RedirectResponse
     {
         try {
             $this->pacienteService->update($id, $request->validated());
