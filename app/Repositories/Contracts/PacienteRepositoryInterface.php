@@ -18,6 +18,7 @@ interface PacienteRepositoryInterface
     // Métodos específicos de Paciente
     public function findByDocumento(string $documento): ?Paciente;
     public function searchByNombre(string $nombre): Collection;
+    public function getAll(): Collection;
     public function existsByDocumento(string $documento): bool;
     public function getPaginated(int $perPage = 15): \Illuminate\Contracts\Pagination\LengthAwarePaginator;
     public function searchPaginated(string $search, int $perPage = 15): \Illuminate\Contracts\Pagination\LengthAwarePaginator;

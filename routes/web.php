@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\PacienteController;
+use App\Http\Controllers\CitaController;
 use Illuminate\Support\Facades\Route;
 
 // Authentication Routes
@@ -18,4 +19,12 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     // Pacientes CRUD
     Route::resource('pacientes', PacienteController::class);
+
+    // Citas CRUD
+    Route::resource('citas', CitaController::class);
+
+    // Rutas adicionales para cambios de estado de citas
+    Route::patch('citas/{cita}/confirmar', [CitaController::class, 'confirmar'])->name('citas.confirmar');
+    Route::patch('citas/{cita}/cancelar', [CitaController::class, 'cancelar'])->name('citas.cancelar');
+    Route::patch('citas/{cita}/completar', [CitaController::class, 'completar'])->name('citas.completar');
 });

@@ -25,6 +25,14 @@ class PacienteService
     }
 
     /**
+     * Obtener todos los pacientes (sin paginación)
+     */
+    public function getAll(): Collection
+    {
+        return $this->pacienteRepository->getAll();
+    }
+
+    /**
      * Buscar pacientes con paginación
      */
     public function searchPaginated(string $search, int $perPage = 15): LengthAwarePaginator

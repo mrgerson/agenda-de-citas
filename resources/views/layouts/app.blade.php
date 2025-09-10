@@ -127,6 +127,39 @@
                             </div>
                         @endif
                     </div>
+
+                    <!-- Citas -->
+                    <div class="space-y-1">
+                        <a href="{{ route('citas.index') }}"
+                            class="group flex items-center px-3 py-3 text-sm font-medium rounded-xl {{ request()->routeIs('citas.*') ? 'text-white bg-gradient-to-r from-emerald-500 to-teal-500 shadow-lg transition-all duration-300 relative' : 'text-emerald-100 hover:bg-white/10 hover:text-white backdrop-blur-sm transition-all duration-300' }}">
+                            @if (request()->routeIs('citas.*'))
+                                <div class="active-tab-indicator"></div>
+                            @endif
+                            <div
+                                class="mr-3 flex-shrink-0 h-5 w-5 {{ request()->routeIs('citas.*') ? 'text-white' : 'text-emerald-300' }}">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            Citas
+                            @if (request()->routeIs('citas.*'))
+                                <i class="fas fa-chevron-down ml-auto text-xs"></i>
+                            @endif
+                        </a>
+
+                        @if (request()->routeIs('citas.*'))
+                            <div class="ml-8 space-y-1 border-l-2 border-emerald-400/30 pl-4">
+                                <a href="{{ route('citas.index') }}"
+                                    class="group flex items-center px-2 py-2 text-xs font-medium rounded-lg {{ request()->routeIs('citas.index') ? 'text-emerald-200 bg-emerald-500/20' : 'text-emerald-300 hover:text-emerald-200 hover:bg-emerald-500/10' }} transition-all duration-200">
+                                    <div class="w-1.5 h-1.5 bg-current rounded-full mr-2"></div>
+                                    Lista de Citas
+                                </a>
+                                <a href="{{ route('citas.create') }}"
+                                    class="group flex items-center px-2 py-2 text-xs font-medium rounded-lg {{ request()->routeIs('citas.create') ? 'text-emerald-200 bg-emerald-500/20' : 'text-emerald-300 hover:text-emerald-200 hover:bg-emerald-500/10' }} transition-all duration-200">
+                                    <div class="w-1.5 h-1.5 bg-current rounded-full mr-2"></div>
+                                    Agendar Cita
+                                </a>
+                            </div>
+                        @endif
+                    </div>
                 </nav>
             </div>
         </div>

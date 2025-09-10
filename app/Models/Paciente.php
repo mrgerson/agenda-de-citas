@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Carbon\Carbon;
 
 class Paciente extends Model
@@ -53,5 +54,21 @@ class Paciente extends Model
     public function scopeByNombre($query, string $nombre)
     {
         return $query->where('nombre', 'LIKE', "%{$nombre}%");
+    }
+
+    /**
+     * Relación con Citas
+     */
+    public function citas(): HasMany
+    {
+        return $this->hasMany(Cita::class);
+    }
+
+    /**
+     * Obtener citas activas (no canceladas)
+     */
+    public function citasActivas(): HasMany
+    {
+        return $this->hasMany(Cita::class)->whereNotIn('estado', ['cancelada']);
     }
 }

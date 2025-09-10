@@ -32,6 +32,11 @@ class PacienteRepository implements PacienteRepositoryInterface
         return $this->model->orderBy('nombre')->get();
     }
 
+    public function getAll(): Collection
+    {
+        return $this->model->orderBy('nombre')->get();
+    }
+
     public function create(array $data): Paciente
     {
         return $this->model->create($data);
