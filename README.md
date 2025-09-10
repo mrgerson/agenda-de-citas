@@ -1,4 +1,8 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Sistema de Gestión Médica - Prueba Técnica
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo">
+</p>
 
 <p align="center">
 <a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
@@ -7,55 +11,255 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## Descripción del Proyecto
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Sistema de gestión médica desarrollado como prueba técnica que incluye tres módulos principales:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **📋 Módulo de Pacientes**: CRUD completo con validaciones
+- **📅 Módulo de Agendamiento**: Gestión de citas médicas
+- **🏥 Módulo de Admisiones**: Control de asistencia y admisión de pacientes
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Características Técnicas
 
-## Learning Laravel
+- **Framework**: Laravel 12
+- **PHP**: 8.2 o superior
+- **Base de Datos**: SQL SERVER
+- **Frontend**: Blade Templates + Tailwind CSS
+- **Arquitectura**: Repository Pattern + Service Layer
+- **Autenticación**: Laravel Auth
+- **Interfaz**: Responsive y moderna
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Funcionalidades Implementadas
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### 🩺 Módulo de Pacientes
+- ✅ CRUD completo (Crear, Leer, Actualizar, Eliminar)
+- ✅ Validaciones robustas (documentos únicos, edades, etc.)
+- ✅ Búsqueda y filtrado
+- ✅ Paginación
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 📅 Módulo de Citas
+- ✅ Agendamiento de citas
+- ✅ Gestión de estados (Programada, Confirmada, Cancelada, Completada)
+- ✅ Validación de horarios únicos
+- ✅ Integración con pacientes
 
-## Laravel Sponsors
+### 🏥 Módulo de Admisiones
+- ✅ Registro de admisiones desde citas confirmadas
+- ✅ Control de asistencia
+- ✅ Estados: Pendiente, Admitido, No Asistió
+- ✅ Dashboard con estadísticas en tiempo real
+- ✅ Notas de admisión
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Requisitos del Sistema
 
-### Premium Partners
+- **PHP**: 8.2 o superior
+- **Composer**: 2.0 o superior
+- **Node.js**: 18 o superior (para assets)
+- **SQL Server**: 2019 o superior
+- **Extensión PHP**: `pdo_sqlsrv` y `sqlsrv`
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## Instalación y Configuración
 
-## Contributing
+### 1. Clonar el Repositorio
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+cd tu-directorio-preferido
+git clone [URL-DEL-REPOSITORIO]
+cd prueba-tecnica
+```
 
-## Code of Conduct
+### 2. Instalar Dependencias de PHP
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Si es la primera vez que descargas el proyecto, ejecuta:
 
-## Security Vulnerabilities
+```bash
+composer install
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 3. Configurar el Entorno
 
-## License
+Copia el archivo de configuración y genera la clave de aplicación:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+### 4. Configurar Base de Datos
+
+El proyecto usa **SQL Server** por defecto. 
+
+**Requisitos previos:**
+- Tener SQL Server instalado y ejecutándose
+- Crear una base de datos para el proyecto
+
+**Configuración en `.env`:**
+```env
+DB_CONNECTION=sqlsrv
+DB_HOST=localhost
+DB_PORT=1433
+DB_DATABASE=tu_nombre_base_datos
+DB_USERNAME=tu_usuario
+DB_PASSWORD=tu_contraseña
+```
+
+**Para Laragon/XAMPP con SQL Server:**
+```env
+DB_CONNECTION=sqlsrv
+DB_HOST=localhost
+DB_PORT=1433
+DB_DATABASE=prueba_tecnica
+DB_USERNAME=sa
+DB_PASSWORD=tu_contraseña_sa
+```
+
+> **Nota importante**: Asegúrate de tener instaladas las extensiones de SQL Server para PHP:
+> - Descarga los drivers desde: [Microsoft SQL Server PHP Drivers](https://docs.microsoft.com/en-us/sql/connect/php/download-drivers-php-sql-server)
+> - En Laragon, las extensiones deben estar habilitadas en `php.ini`:
+>   ```ini
+>   extension=pdo_sqlsrv
+>   extension=sqlsrv
+>   ```
+
+### 5. Ejecutar Migraciones y Seeders
+
+Ejecuta las migraciones y carga datos de prueba:
+
+```bash
+php artisan migrate --seed
+```
+
+Este comando creará las tablas y cargará datos de ejemplo incluyendo:
+- Usuario de prueba (admin@test.com / password)
+- 10 pacientes de ejemplo
+- 15 citas de ejemplo
+- 5 admisiones de ejemplo
+
+### 6. Instalar Dependencias de Frontend (Opcional)
+
+Si necesitas recompilar los assets:
+
+```bash
+npm install
+npm run build
+```
+
+### 7. Ejecutar el Servidor de Desarrollo
+
+```bash
+php artisan serve
+```
+
+El sistema estará disponible en: `http://localhost:8000`
+
+## Credenciales de Acceso
+
+**Usuario de prueba:**
+- **Email**: admin@test.com
+- **Contraseña**: password
+
+## Estructura del Proyecto
+
+```
+app/
+├── Http/
+│   ├── Controllers/          # Controladores
+│   ├── Requests/            # Validaciones de formularios
+│   └── Middleware/          # Middleware personalizado
+├── Models/                  # Modelos Eloquent
+├── Repositories/            # Patrón Repository
+│   ├── Contracts/          # Interfaces
+│   └── Eloquent/           # Implementaciones
+├── Services/               # Capa de servicios
+└── Providers/              # Service Providers
+
+database/
+├── migrations/             # Migraciones de base de datos
+└── seeders/               # Seeders para datos de prueba
+
+resources/
+├── views/                 # Plantillas Blade
+│   ├── auth/             # Autenticación
+│   ├── pacientes/        # Módulo de pacientes
+│   ├── citas/           # Módulo de citas
+│   ├── admisiones/      # Módulo de admisiones
+│   └── layouts/         # Layouts principales
+└── css/                  # Estilos CSS
+```
+
+## Comandos Útiles
+
+### Limpiar Cachés
+```bash
+php artisan config:clear
+php artisan view:clear
+php artisan route:clear
+```
+
+### Ver Rutas
+```bash
+php artisan route:list
+```
+
+### Ejecutar Tests (si están implementados)
+```bash
+php artisan test
+```
+
+### Regenerar Datos de Prueba
+```bash
+php artisan migrate:fresh --seed
+```
+
+## Funcionalidades por Módulo
+
+### 👤 Pacientes
+- `/pacientes` - Lista de pacientes
+- `/pacientes/create` - Crear nuevo paciente
+- `/pacientes/{id}` - Ver detalles del paciente
+- `/pacientes/{id}/edit` - Editar paciente
+
+### 📅 Citas
+- `/citas` - Lista de citas
+- `/citas/create` - Agendar nueva cita
+- `/citas/{id}` - Ver detalles de la cita
+- `/citas/{id}/edit` - Editar cita
+- Acciones: Confirmar, Cancelar, Completar
+
+### 🏥 Admisiones
+- `/admisiones-dashboard` - Dashboard principal
+- `/admisiones` - Lista de admisiones
+- `/admisiones/create` - Crear nueva admisión
+- `/admisiones/{id}` - Ver detalles de la admisión
+- `/admisiones/{id}/edit` - Editar admisión
+- Acciones: Marcar como admitido, Marcar como no asistió
+
+## Tecnologías Utilizadas
+
+- **Backend**: Laravel 12, PHP 8.2
+- **Frontend**: Blade, Tailwind CSS, Font Awesome
+- **Base de Datos**: SQL Server
+- **Arquitectura**: Repository Pattern, Service Layer
+- **Validaciones**: Form Requests personalizados
+- **UI/UX**: Responsive design, modales, notificaciones
+
+## Arquitectura del Sistema
+
+El proyecto sigue las mejores prácticas de Laravel implementando:
+
+- **Repository Pattern**: Para abstracción de datos
+- **Service Layer**: Para lógica de negocio
+- **Form Requests**: Para validaciones
+- **Resource Controllers**: Para operaciones CRUD
+- **Eloquent Relationships**: Para relaciones entre modelos
+
+## Soporte y Contacto
+
+Para cualquier consulta o problema:
+- Revisa la documentación de Laravel: [https://laravel.com/docs](https://laravel.com/docs)
+- Verifica que todos los requisitos estén instalados
+- Asegúrate de que el servidor esté ejecutándose en el puerto 8000
+
+## Licencia
+
+Este proyecto está desarrollado bajo la licencia MIT de Laravel.
